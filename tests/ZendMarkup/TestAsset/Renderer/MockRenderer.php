@@ -14,45 +14,36 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @see Zend_Markup_Renderer_TokenConverterInterface
+ * @namespace
  */
+namespace ZendTest\Markup\TestAsset\Renderer;
 
 /**
- * Tag interface
+ * HTML renderer
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Html
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_Test_Renderer_Html_Bar implements Zend_Markup_Renderer_TokenConverterInterface
+class MockRenderer extends \Zend\Markup\Renderer\RendererAbstract
 {
 
     /**
-     * Convert the token
+     * Set the default filter
      *
-     * @param Zend_Markup_Token $token
-     * @param string $text
-     *
-     * @return string
+     * @return void
      */
-    public function convert(Zend_Markup_Token $token, $text)
+    public function addDefaultFilters()
     {
-        $bar = $token->getAttribute('bar');
-
-        if (!empty($bar)) {
-            $bar = '=' . $bar;
-        }
-
-        return "[foo{$bar}]" . $text . '[/foo]';
+        $this->_defaultFilter = new \Zend\Filter\FilterChain();
     }
-
 }

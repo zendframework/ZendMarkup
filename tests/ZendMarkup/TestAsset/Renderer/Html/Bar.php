@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,36 +23,37 @@
 /**
  * @namespace
  */
-namespace ZendTest\Markup;
-use Zend\Markup;
-
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Markup_FactoryTest::main");
-}
-
+namespace ZendTest\Markup\TestAsset\Renderer\HTML;
 
 /**
+ * Tag interface
+ *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage UnitTests
- * @group      Zend_Markup
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class Bar implements \Zend\Markup\Renderer\TokenConverterInterface
 {
 
-    public function testFactory()
+    /**
+     * Convert the token
+     *
+     * @param Zend_Markup_Token $token
+     * @param string $text
+     *
+     * @return string
+     */
+    public function convert(\Zend\Markup\Token $token, $text)
     {
-        Markup\Markup::addParserPath('ZendTest\Markup\TestAsset\Parser', 'Zend/Markup/TestAsset/Parser');
-        Markup\Markup::addRendererPath('ZendTest\Markup\TestAsset\Renderer', 'Zend/Markup/TestAsset/Renderer');
+        $bar = $token->getAttribute('bar');
 
-        Markup\Markup::factory('MockParser', 'MockRenderer');
+        if (!empty($bar)) {
+            $bar = '=' . $bar;
+        }
+
+        return "[foo{$bar}]" . $text . '[/foo]';
     }
 
-}
-
-// Call Zend_Markup_BbcodeTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Markup_FactoryTest::main") {
-    \Zend_Markup_BbcodeTest::main();
 }
