@@ -23,16 +23,18 @@
 /**
  * @namespace
  */
-namespace Zend\Markup;
+namespace Zend\Markup\Renderer;
 
-use Zend\Filter;
+use Zend\Markup\Parser,
+    Zend\Markup\Token,
+    Zend\Filter;
 
 /**
  * Defines the basic rendering functionality
  *
  * @uses       \Zend\Filter\FilterChain
  * @uses       \Zend\Markup\Renderer\Exception
- * @uses       \Zend\Markup\Renderer\TokenConverterInterface
+ * @uses       \Zend\Markup\Renderer\TokenConverter
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
@@ -41,8 +43,12 @@ use Zend\Filter;
  */
 abstract class AbstractRenderer
 {
+    const TYPE_CALLBACK = 4;
+    const TYPE_REPLACE  = 8;
+    const TYPE_ALIAS    = 16;
+
     /**
-     * Markup info
+     * Tag info
      *
      * @var array
      */
@@ -84,7 +90,7 @@ abstract class AbstractRenderer
     protected $_groups = array();
 
     /**
-     * Plugin loader for markups
+     * Plugin loader for tags
      *
      * @var \Zend\Loader\PrefixPathMapper
      */
@@ -102,7 +108,7 @@ abstract class AbstractRenderer
      *
      * @var string
      */
-    protected $_encoding = 'UTF-8';
+    protected static $_encoding = 'UTF-8';
 
 
     /**
@@ -125,9 +131,6 @@ abstract class AbstractRenderer
         }
         if (isset($options['parser'])) {
             $this->setParser($options['parser']);
-        }
-        if (isset($options['useDefaultTags']) && ($options['useDefaultTags'] === false)) {
-            $this->removeDefaultTags();
         }
         if (!isset($options['useDefaultFilters']) || ($options['useDefaultFilters'] === true)) {
             $this->addDefaultFilters();
@@ -176,11 +179,9 @@ abstract class AbstractRenderer
      *
      * @return \Zend\Markup\AbstractRenderer
      */
-    public function setEncoding($encoding)
+    public static function setEncoding($encoding)
     {
-        $this->_encoding = $encoding;
-
-        return $this;
+        self::$_encoding = $encoding;
     }
 
     /**
@@ -188,20 +189,21 @@ abstract class AbstractRenderer
      *
      * @return string
      */
-    public function getEncoding()
+    public static function getEncoding()
     {
-        return $this->_encoding;
+        return self::$_encoding;
     }
 
     /**
      * Add a new markup
      *
      * @param string $name
-     * @param \Zend\Markup\Renderer\Markup $markup
+     * @param string $type
+     * @param array $options
      *
      * @return \Zend\Markup\AbstractRenderer
      */
-    public function addMarkup($name, Renderer\Markup $markup)
+    public function addMarkup($name, $type, array $options)
     {
         if (!isset($options['group']) && ($type ^ self::TYPE_ALIAS)) {
             throw new Exception("There is no render group defined.");
@@ -222,9 +224,9 @@ abstract class AbstractRenderer
 
         // check the type
         if ($type & self::TYPE_CALLBACK) {
-            // add a callback markup
+            // add a callback tag
             if (isset($options['callback'])) {
-                if (!($options['callback'] instanceof TokenConverterInterface)) {
+                if (!($options['callback'] instanceof TokenConverter)) {
                     throw new Exception("Not a valid markup callback.");
                 }
                 if (method_exists($options['callback'], 'setRenderer')) {
@@ -280,7 +282,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Remove all the markups
+     * Remove the default tags
      *
      * @return void
      */
@@ -319,11 +321,11 @@ abstract class AbstractRenderer
      */
     protected function _render(Token $token)
     {
-        $return = '';
+        $return    = '';
 
         $this->_token = $token;
 
-        // if this markup has children, execute them
+        // if this tag has children, execute them
         if ($token->hasChildren()) {
             foreach ($token->getChildren() as $child) {
                 $return .= $this->_execute($child);
@@ -345,14 +347,14 @@ abstract class AbstractRenderer
             return false;
         }
 
-        $markup = $this->_markups[$token->getName()];
+        $tag = $this->_markups[$token->getName()];
 
         // alias processing
-        while ($markup['type'] & self::TYPE_ALIAS) {
-            $markup = $this->_markups[$markup['name']];
+        while ($tag['type'] & self::TYPE_ALIAS) {
+            $tag = $this->_markups[$tag['name']];
         }
 
-        return isset($markup['group']) ? $markup['group'] : false;
+        return isset($tag['group']) ? $tag['group'] : false;
     }
 
     /**
@@ -363,7 +365,7 @@ abstract class AbstractRenderer
      */
     protected function _execute(Token $token)
     {
-        // first return the normal text markups
+        // first return the normal text tags
         if ($token->getType() == Token::TYPE_NONE) {
             return $this->_filter($token->getTag());
         }
@@ -380,7 +382,7 @@ abstract class AbstractRenderer
         $markup = (!$name) ? false : $this->_markups[$name];
         $empty  = (is_array($markup) && array_key_exists('empty', $markup) && $markup['empty']);
 
-        // check if the markup has content
+        // check if the tag has content
         if (!$empty && !$token->hasChildren()) {
             return '';
         }
@@ -414,24 +416,20 @@ abstract class AbstractRenderer
 
         // callback
         if (is_array($markup) && ($markup['type'] & self::TYPE_CALLBACK)) {
-            // load the callback if the markup doesn't exist
-            if (!($markup['callback'] instanceof TokenConverterInterface)) {
+            // load the callback if the tag doesn't exist
+            if (!($markup['callback'] instanceof TokenConverter)) {
                 $class = $this->getPluginLoader()->load($name);
 
                 $markup['callback'] = new $class;
-
-                if (!($markup['callback'] instanceof TokenConverterInterface)) {
-                    throw new Exception("Callback for markup '$name' found, but it isn't valid.");
-                }
 
                 if (method_exists($markup['callback'], 'setRenderer')) {
                     $markup['callback']->setRenderer($this);
                 }
             }
             if ($markup['type'] && !$empty) {
-                $return = $markup['callback']->convert($token, $this->_render($token));
+                $return = $markup['callback']->__invoke($token, $this->_render($token));
             } else {
-                $return = $markup['callback']->convert($token, null);
+                $return = $markup['callback']->__invoke($token, null);
             }
         } else {
             // replace
@@ -520,24 +518,24 @@ abstract class AbstractRenderer
      * Execute a replace token
      *
      * @param  \Zend\Markup\Token $token
-     * @param  array $markup
+     * @param  array $tag
      * @return string
      */
-    protected function _executeReplace(Token $token, $markup)
+    protected function _executeReplace(Token $token, $tag)
     {
-        return $markup['start'] . $this->_render($token) . $markup['end'];
+        return $tag['start'] . $this->_render($token) . $tag['end'];
     }
 
     /**
      * Execute a single replace token
      *
      * @param  \Zend\Markup\Token $token
-     * @param  array $markup
+     * @param  array $tag
      * @return string
      */
-    protected function _executeSingleReplace(Token $token, $markup)
+    protected function _executeSingleReplace(Token $token, $tag)
     {
-        return $markup['replace'];
+        return $tag['replace'];
     }
 
     /**
@@ -548,7 +546,7 @@ abstract class AbstractRenderer
     public function getDefaultFilter()
     {
         if (null === $this->_defaultFilter) {
-            $this->setDefaultFilter();
+            $this->addDefaultFilters();
         }
 
         return $this->_defaultFilter;
