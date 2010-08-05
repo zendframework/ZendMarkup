@@ -23,15 +23,15 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
+namespace Zend\Markup\Renderer\Markup\Html;
 use Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
  * Image markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\HTML
- * @uses       \Zend\Markup\Renderer\Markup\HTML\AbstractHTML
+ * @uses       \Zend\Markup\Renderer\Html
+ * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
@@ -39,7 +39,7 @@ use Zend\Markup\Token;
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Img extends AbstractHTML
+class Img extends AbstractHtml
 {
 
     /**
@@ -60,7 +60,7 @@ class Img extends AbstractHTML
 
         // check if the URL is valid
         // TODO: use \Zend\Uri for this
-        if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
+        if (!\Zend\Markup\Renderer\Html::isValidUri($uri)) {
             return $text;
         }
 
