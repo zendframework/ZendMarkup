@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace ZendTest\Markup\TestAsset\Renderer\HTML;
+namespace ZendTest\Markup\TestAsset\Renderer\Html;
 
 use Zend\Markup\Renderer\AbstractRenderer;
 
