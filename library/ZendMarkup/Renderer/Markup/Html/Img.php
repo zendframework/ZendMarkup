@@ -23,22 +23,23 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
+namespace Zend\Markup\Renderer\Markup\Html;
+use Zend\Markup\Renderer\Markup;
 use Zend\Markup\Token;
 
 /**
- * URL markup for HTML
+ * Image markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\HTML
- * @uses       \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
+ * @uses       \Zend\Markup\Renderer\Html
+ * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
  * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @subpackage Renderer_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class URL extends HTMLAbstract
+class Img extends AbstractHtml
 {
 
     /**
@@ -51,27 +52,33 @@ class URL extends HTMLAbstract
      */
     public function __invoke(Token $token, $text)
     {
-        if ($token->hasAttribute('url')) {
-            $uri = $token->getAttribute('url');
-        } else {
-            $uri = $text;
-        }
+        $uri = $text;
 
         if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
             $uri = 'http://' . $uri;
         }
 
         // check if the URL is valid
-        // TODO: use the new Zend\URI for this
-        if (!\Zend\Markup\Renderer\HTML::isValidUri($uri)) {
+        // TODO: use \Zend\Uri for this
+        if (!\Zend\Markup\Renderer\Html::isValidUri($uri)) {
             return $text;
         }
 
-        $attributes = $this->renderAttributes($token);
+        if ($token->hasAttribute('alt')) {
+            $alt = $token->getAttribute('alt');
+        } else {
+            // try to get the alternative from the URL
+            $alt = rtrim($text, '/');
+            $alt = strrchr($alt, '/');
+            if (false !== strpos($alt, '.')) {
+                $alt = substr($alt, 1, strpos($alt, '.') - 1);
+            }
+        }
 
-        // run the URI through htmlentities
+        // run the URI and alt through htmlentities
         $uri = htmlentities($uri, ENT_QUOTES, $this->getEncoding());
+        $alt = htmlentities($alt, ENT_QUOTES, $this->getEncoding());
 
-        return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
+        return "<img src=\"{$uri}\" alt=\"{$alt}\"" . $this->renderAttributes($token) . " />";
     }
 }

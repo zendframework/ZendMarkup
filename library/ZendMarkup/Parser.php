@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,33 +23,42 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup\HTML;
-use Zend\Markup;
+namespace Zend\Markup;
 
 /**
- * Code markup for HTML
- *
- * @uses       \Zend\Markup\Renderer\Markup\HTML\HTMLAbstract
- * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup_Html
+ * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Code extends HTMLAbstract
+interface Parser
 {
+    /**
+     * Parse a string
+     *
+     * @param  string $value
+     *
+     * @return array
+     */
+    public function parse($value);
 
     /**
-     * Convert the token
+     * Build a tree with a certain strategy
      *
-     * @param \Zend\Markup\Token $token
-     * @param string $text
+     * @param array $tokens
+     * @param string $strategy
      *
-     * @return string
+     * @return \Zend\Markup\TokenList
      */
-    public function __invoke(Markup\Token $token, $text)
-    {
-        return highlight_string($text, true);
-    }
+    public function buildTree(array $tokens, $strategy = 'default');
+
+    /**
+     * Tokenize a string
+     *
+     * @param string $value
+     *
+     * @return array
+     */
+    public function tokenize($value);
 }

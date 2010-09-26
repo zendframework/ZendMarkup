@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,48 +23,33 @@
 /**
  * @namespace
  */
-namespace Zend\Markup\Renderer\Markup;
+namespace Zend\Markup\Renderer\Markup\Html;
 use Zend\Markup;
-use Zend\Markup\Renderer;
 
 /**
- * Interface for a markup
+ * Code markup for HTML
  *
- * @uses       \Zend\Markup\Renderer\RendererAbstract
+ * @uses       \Zend\Markup\Renderer\Markup\Html\AbstractHtml
+ * @uses       \Zend\Markup\Token
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
+ * @subpackage Renderer_Markup_Html
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface MarkupInterface
+class Code extends AbstractHtml
 {
 
     /**
-     * Set the encoding on this markup
-     *
-     * @param string $encoding
-     *
-     * @return \Zend\Markup\Renderer\Markup\MarkupInterface
-     */
-    public function setEncoding($encoding = 'UTF-8');
-
-    /**
-     * Set the renderer on this markup
-     *
-     * @param \Zend\Markup\Renderer\RendererAbstract $renderer
-     *
-     * @return \Zend\Markup\Renderer\Markup\MarkupInterface
-     */
-    public function setRenderer(Renderer\RendererAbstract $renderer);
-
-    /**
-     * Invoke the markup
+     * Convert the token
      *
      * @param \Zend\Markup\Token $token
      * @param string $text
      *
      * @return string
      */
-    public function __invoke(Markup\Token $token, $text);
+    public function __invoke(Markup\Token $token, $text)
+    {
+        return highlight_string($text, true);
+    }
 }
