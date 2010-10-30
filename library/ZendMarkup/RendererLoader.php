@@ -14,56 +14,28 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Markup\Renderer;
+namespace Zend\Markup;
 
-use Zend\Markup\Token;
+use Zend\Loader\PluginClassLoader;
 
 /**
- * Interface for a markup
+ * Plugin Class Loader implementation for markup renderers.
  *
- * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Markup
+class RendererLoader extends PluginClassLoader
 {
-
     /**
-     * Set the encoding on this markup
-     *
-     * @param string $encoding
-     *
-     * @return \Zend\Markup\Renderer\Markup
+     * @var array Pre-aliased renderers 
      */
-    public function setEncoding($encoding = 'UTF-8');
-
-    /**
-     * Set the renderer on this markup
-     *
-     * @param \Zend\Markup\Renderer\AbstractRenderer $renderer
-     *
-     * @return \Zend\Markup\Renderer\Markup
-     */
-    public function setRenderer(AbstractRenderer $renderer);
-
-    /**
-     * Invoke the markup
-     *
-     * @param \Zend\Markup\Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function __invoke(Token $token, $text);
+    protected $plugins = array(
+        'html'  => 'Zend\Markup\Renderer\Html',
+    );
 }
