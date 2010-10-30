@@ -14,63 +14,43 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Markup\Renderer;
 
-use Zend\Markup\Token;
+use Zend\Loader\PluginBroker;
 
 /**
- * Interface for a markup
+ * Broker for markup converter instances
  *
- * @uses       \Zend\Markup\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Renderer_Markup
+ * @subpackage Renderer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Markup
+class MarkupBroker extends PluginBroker
 {
+    /**
+     * @var string Default plugin loading strategy
+     */
+    protected $defaultClassLoader = 'Zend\Markup\Renderer\MarkupLoader';
 
     /**
-     * Get the group of this markup
-     *
-     * @return string
+     * Determine if we have a valid markup
+     * 
+     * @param  mixed $plugin 
+     * @return true
+     * @throws Exception
      */
-    public function getGroup();
-
-    /**
-     * Set the encoding on this markup
-     *
-     * @param string $encoding
-     *
-     * @return \Zend\Markup\Renderer\Markup
-     */
-    public function setEncoding($encoding = 'UTF-8');
-
-    /**
-     * Set the renderer on this markup
-     *
-     * @param \Zend\Markup\Renderer\AbstractRenderer $renderer
-     *
-     * @return \Zend\Markup\Renderer\Markup
-     */
-    public function setRenderer(AbstractRenderer $renderer);
-
-    /**
-     * Invoke the markup
-     *
-     * @param \Zend\Markup\Token $token
-     * @param string $text
-     *
-     * @return string
-     */
-    public function __invoke(Token $token, $text);
+    protected function validatePlugin($plugin)
+    {
+        if (!$plugin instanceof Markup) {
+            throw new Exception('Markup converters must implement Zend\Markup\Renderer\Markup');
+        }
+        return true;
+    }
 }

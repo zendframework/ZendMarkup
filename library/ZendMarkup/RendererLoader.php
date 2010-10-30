@@ -14,50 +14,28 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Markup;
 
+use Zend\Loader\PluginClassLoader;
+
 /**
+ * Plugin Class Loader implementation for markup renderers.
+ *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Parser
+class RendererLoader extends PluginClassLoader
 {
     /**
-     * Parse a string
-     *
-     * @param  string $value
-     *
-     * @return array
+     * @var array Pre-aliased renderers 
      */
-    public function parse($value);
-
-    /**
-     * Build a tree with a certain strategy
-     *
-     * @param array $tokens
-     * @param string $strategy
-     *
-     * @return \Zend\Markup\TokenList
-     */
-    public function buildTree(array $tokens, $strategy = 'default');
-
-    /**
-     * Tokenize a string
-     *
-     * @param string $value
-     *
-     * @return array
-     */
-    public function tokenize($value);
+    protected $plugins = array(
+        'html'  => 'Zend\Markup\Renderer\Html',
+    );
 }

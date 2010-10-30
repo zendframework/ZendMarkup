@@ -14,50 +14,41 @@
  *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Markup;
 
+use Zend\Loader\PluginBroker;
+
 /**
+ * Broker for markup parser instances
+ *
  * @category   Zend
  * @package    Zend_Markup
- * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Parser
+class ParserBroker extends PluginBroker
 {
     /**
-     * Parse a string
-     *
-     * @param  string $value
-     *
-     * @return array
+     * @var string Default plugin loading strategy
      */
-    public function parse($value);
+    protected $defaultClassLoader = 'Zend\Markup\ParserLoader';
 
     /**
-     * Build a tree with a certain strategy
-     *
-     * @param array $tokens
-     * @param string $strategy
-     *
-     * @return \Zend\Markup\TokenList
+     * Determine if we have a valid parser
+     * 
+     * @param  mixed $plugin 
+     * @return true
+     * @throws Exception
      */
-    public function buildTree(array $tokens, $strategy = 'default');
-
-    /**
-     * Tokenize a string
-     *
-     * @param string $value
-     *
-     * @return array
-     */
-    public function tokenize($value);
+    protected function validatePlugin($plugin)
+    {
+        if (!$plugin instanceof Parser) {
+            throw new Exception('Markup parsers must implement Zend\Markup\Parser');
+        }
+        return true;
+    }
 }
