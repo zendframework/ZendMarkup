@@ -8,11 +8,11 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Markup;
+namespace ZendMarkup\Renderer\Markup;
 
 use Zend\Filter\FilterInterface;
-use Zend\Markup\Renderer\AbstractRenderer;
-use Zend\Markup\Token;
+use ZendMarkup\Renderer\AbstractRenderer;
+use ZendMarkup\Token;
 
 /**
  * Interface for a markup

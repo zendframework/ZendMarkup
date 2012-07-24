@@ -8,10 +8,10 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\Renderer\Markup;
+namespace ZendMarkupTest\Renderer\Markup;
 
-use Zend\Markup\Renderer\Markup\Html\Code as CodeMarkup;
-use Zend\Markup\Token;
+use ZendMarkup\Renderer\Markup\Html\Code as CodeMarkup;
+use ZendMarkup\Token;
 
 /**
  * @category   Zend

@@ -8,10 +8,10 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer;
+namespace ZendMarkup\Renderer;
 
 use Traversable;
-use Zend\Markup\Renderer\Markup\Html\Root as RootMarkup;
+use ZendMarkup\Renderer\Markup\Html\Root as RootMarkup;
 use Zend\Stdlib\ArrayUtils;
 
 /**

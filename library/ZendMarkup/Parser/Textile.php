@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Parser;
+namespace ZendMarkup\Parser;
 
-use Zend\Markup;
+use ZendMarkup as Markup;
 
 /**
  * @category   Zend
@@ -50,7 +50,7 @@ class Textile implements ParserInterface
      * @param array $tokens
      * @param string $strategy
      *
-     * @return \Zend\Markup\TokenList
+     * @return \ZendMarkup\TokenList
      */
     public function buildTree(array $tokens, $strategy = 'default')
     {

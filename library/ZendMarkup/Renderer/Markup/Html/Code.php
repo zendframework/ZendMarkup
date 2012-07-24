@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Markup\Html;
+namespace ZendMarkup\Renderer\Markup\Html;
 
-use Zend\Markup\Token;
+use ZendMarkup\Token;
 
 /**
  * Code markup for HTML

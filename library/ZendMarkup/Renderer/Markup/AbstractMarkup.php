@@ -8,12 +8,12 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Markup;
+namespace ZendMarkup\Renderer\Markup;
 
 use Zend\Filter\FilterChain;
 use Zend\Filter\FilterInterface;
-use Zend\Markup\Renderer\AbstractRenderer;
-use Zend\Markup\Renderer\Markup;
+use ZendMarkup\Renderer\AbstractRenderer;
+use ZendMarkup\Renderer\Markup;
 
 /**
  * Abstract markup
@@ -28,7 +28,7 @@ abstract class AbstractMarkup implements Markup\MarkupInterface
     /**
      * The renderer
      *
-     * @var \Zend\Markup\Renderer\AbstractRenderer
+     * @var \ZendMarkup\Renderer\AbstractRenderer
      */
     protected $_renderer;
 
@@ -52,7 +52,7 @@ abstract class AbstractMarkup implements Markup\MarkupInterface
      *
      * @param string $encoding
      *
-     * @return \Zend\Markup\Renderer\Markup\AbstractMarkup
+     * @return \ZendMarkup\Renderer\Markup\AbstractMarkup
      */
     public function setEncoding($encoding = 'UTF-8')
     {
@@ -74,9 +74,9 @@ abstract class AbstractMarkup implements Markup\MarkupInterface
     /**
      * Set the renderer instance
      *
-     * @param \Zend\Markup\Renderer\AbstractRenderer $renderer
+     * @param \ZendMarkup\Renderer\AbstractRenderer $renderer
      *
-     * @return \Zend\Markup\Renderer\Markup\AbstractMarkup
+     * @return \ZendMarkup\Renderer\Markup\AbstractMarkup
      */
     public function setRenderer(AbstractRenderer $renderer)
     {
@@ -90,7 +90,7 @@ abstract class AbstractMarkup implements Markup\MarkupInterface
     /**
      * Get the renderer instance
      *
-     * @return \Zend\Markup\Renderer\AbstractRenderer
+     * @return \ZendMarkup\Renderer\AbstractRenderer
      */
     public function getRenderer()
     {

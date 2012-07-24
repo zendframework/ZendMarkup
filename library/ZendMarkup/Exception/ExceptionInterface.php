@@ -8,7 +8,7 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Exception;
+namespace ZendMarkup\Exception;
 
 interface ExceptionInterface
 {

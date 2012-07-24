@@ -8,7 +8,7 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup;
+namespace ZendMarkup;
 
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ConfigurationInterface;
@@ -31,7 +31,7 @@ class RendererPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'html'  => 'Zend\Markup\Renderer\Html',
+        'html'  => 'ZendMarkup\Renderer\Html',
     );
 
     /**

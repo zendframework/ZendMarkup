@@ -8,10 +8,10 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\Renderer\Markup;
+namespace ZendMarkupTest\Renderer\Markup;
 
-use Zend\Markup\Renderer\Markup\Html\Replace as ReplaceMarkup;
-use Zend\Markup\Token;
+use ZendMarkup\Renderer\Markup\Html\Replace as ReplaceMarkup;
+use ZendMarkup\Token;
 
 /**
  * @category   Zend

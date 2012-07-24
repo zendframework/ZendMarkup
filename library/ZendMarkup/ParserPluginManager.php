@@ -8,7 +8,7 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup;
+namespace ZendMarkup;
 
 use Zend\ServiceManager\AbstractPluginManager;
 
@@ -30,8 +30,8 @@ class ParserPluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array(
-        'bbcode'  => 'Zend\Markup\Parser\Bbcode',
-        'textile' => 'Zend\Markup\Parser\Textile',
+        'bbcode'  => 'ZendMarkup\Parser\Bbcode',
+        'textile' => 'ZendMarkup\Parser\Textile',
     );
 
     /**

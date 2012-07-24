@@ -8,7 +8,7 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup;
+namespace ZendMarkup;
 
 /**
  * @category   Zend
@@ -22,7 +22,7 @@ class Token
     /**
      * Children of this token
      *
-     * @var \Zend\Markup\TokenList
+     * @var \ZendMarkup\TokenList
      */
     protected $_children;
 
@@ -64,7 +64,7 @@ class Token
     /**
      * The parent token
      *
-     * @var \Zend\Markup\Token
+     * @var \ZendMarkup\Token
      */
     protected $_parent;
 
@@ -76,7 +76,7 @@ class Token
      * @param  string $type
      * @param  string $name
      * @param  array $attributes
-     * @param  \Zend\Markup\Token $parent
+     * @param  \ZendMarkup\Token $parent
      */
     public function __construct(
         $content,
@@ -98,7 +98,7 @@ class Token
      * Set the stopper
      *
      * @param string $stopper
-     * @return \Zend\Markup\Token
+     * @return \ZendMarkup\Token
      */
     public function setStopper($stopper)
     {
@@ -223,8 +223,8 @@ class Token
     /**
      * Set the children token list
      *
-     * @param  \Zend\Markup\TokenList $children
-     * @return \Zend\Markup\Token
+     * @param  \ZendMarkup\TokenList $children
+     * @return \ZendMarkup\Token
      */
     public function setChildren(TokenList $children)
     {
@@ -235,7 +235,7 @@ class Token
     /**
      * Get the children for this token
      *
-     * @return \Zend\Markup\TokenList
+     * @return \ZendMarkup\TokenList
      */
     public function getChildren()
     {
@@ -258,7 +258,7 @@ class Token
     /**
      * Get the parent token (if any)
      *
-     * @return \Zend\Markup\Token
+     * @return \ZendMarkup\Token
      */
     public function getParent()
     {
@@ -268,8 +268,8 @@ class Token
     /**
      * Set a parent token
      *
-     * @param  \Zend\Markup\Token $parent
-     * @return \Zend\Markup\Token
+     * @param  \ZendMarkup\Token $parent
+     * @return \ZendMarkup\Token
      */
     public function setParent(Token $parent)
     {

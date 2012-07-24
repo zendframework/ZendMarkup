@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\TestAsset\Renderer\Html;
+namespace ZendMarkupTest\TestAsset\Renderer\Html;
 
-use Zend\Markup\Renderer\AbstractRenderer;
+use ZendMarkup\Renderer\AbstractRenderer;
 
 /**
  * Tag interface
@@ -19,7 +19,7 @@ use Zend\Markup\Renderer\AbstractRenderer;
  * @package    Zend_Markup
  * @subpackage Renderer_Html
  */
-class Bar implements \Zend\Markup\Renderer\Markup\MarkupInterface
+class Bar implements \ZendMarkup\Renderer\Markup\MarkupInterface
 {
     public function setEncoding($encoding = 'UTF-8')
     {
@@ -37,7 +37,7 @@ class Bar implements \Zend\Markup\Renderer\Markup\MarkupInterface
      *
      * @return string
      */
-    public function __invoke(\Zend\Markup\Token $token, $text)
+    public function __invoke(\ZendMarkup\Token $token, $text)
     {
         $bar = $token->getAttribute('bar');
 

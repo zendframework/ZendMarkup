@@ -8,12 +8,12 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Markup\Html;
+namespace ZendMarkup\Renderer\Markup\Html;
 
 use Zend\Filter\Callback as CallbackFilter;
 use Zend\Filter\HtmlEntities as HtmlEntitiesFilter;
-use Zend\Markup;
-use Zend\Markup\Renderer\Markup\AbstractMarkup;
+use ZendMarkup as Markup;
+use ZendMarkup\Renderer\Markup\AbstractMarkup;
 
 /**
  * Abstract markup
@@ -51,7 +51,7 @@ abstract class AbstractHtml extends AbstractMarkup
      *
      * @param array $attributes
      *
-     * @return \Zend\Markup\Renderer\Markup\Html\AbstractHtml
+     * @return \ZendMarkup\Renderer\Markup\Html\AbstractHtml
      */
     public function setAttributes(array $attributes)
     {
@@ -66,7 +66,7 @@ abstract class AbstractHtml extends AbstractMarkup
      * @param string $name
      * @param string $value
      *
-     * @return \Zend\Markup\Renderer\Markup\Html\AbstractHtml
+     * @return \ZendMarkup\Renderer\Markup\Html\AbstractHtml
      */
     public function addAttribute($name, $value)
     {
@@ -80,7 +80,7 @@ abstract class AbstractHtml extends AbstractMarkup
      *
      * @param string $name
      *
-     * @return \Zend\Markup\Renderer\Markup\Html\AbstractHtml
+     * @return \ZendMarkup\Renderer\Markup\Html\AbstractHtml
      */
     public function removeAttribute($name)
     {
@@ -92,7 +92,7 @@ abstract class AbstractHtml extends AbstractMarkup
     /**
      * Render some attributes
      *
-     * @param  \Zend\Markup\Token $token
+     * @param  \ZendMarkup\Token $token
      * @return string
      */
     public function renderAttributes(Markup\Token $token)

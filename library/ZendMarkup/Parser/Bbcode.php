@@ -8,12 +8,12 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Parser;
+namespace ZendMarkup\Parser;
 
 use Traversable;
-use Zend\Markup\Parser;
-use Zend\Markup\Token;
-use Zend\Markup\TokenList;
+use ZendMarkup\Parser;
+use ZendMarkup\Token;
+use ZendMarkup\TokenList;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -403,7 +403,7 @@ class Bbcode implements ParserInterface
      * {@link buildTree()} method.
      *
      * @param  string $value
-     * @return \Zend\Markup\TokenList
+     * @return \ZendMarkup\TokenList
      * @throws Exception\InvalidArgumentException
      */
     public function parse($value)
@@ -568,7 +568,7 @@ class Bbcode implements ParserInterface
      * @throws Exception\RuntimeException If there is no initial group defined
      * @throws Exception\RuntimeException If there is no default group defined
      * @throws Exception\InvalidArgumentException If there is no treebuilding strategy
-     * @return \Zend\Markup\TokenList/
+     * @return \ZendMarkup\TokenList/
      */
     public function buildTree(array $tokens, $strategy = 'default')
     {
@@ -597,7 +597,7 @@ class Bbcode implements ParserInterface
      *
      * @param array $tokens
      *
-     * @return \Zend\Markup\TokenList
+     * @return \ZendMarkup\TokenList
      */
     protected function _createTree($tokens)
     {
@@ -636,7 +636,7 @@ class Bbcode implements ParserInterface
                 // add the old items again if there are any
                 if (!empty($oldItems)) {
                     foreach (array_reverse($oldItems) as $item) {
-                        /* @var $token \Zend\Markup\Token */
+                        /* @var $token \ZendMarkup\Token */
                         $this->_current->addChild($item);
                         $item->setParent($this->_current);
                         $this->_current = $item;
@@ -800,7 +800,7 @@ class Bbcode implements ParserInterface
     /**
      * Add to searched stoppers
      *
-     * @param  \Zend\Markup\Token $token
+     * @param  \ZendMarkup\Token $token
      * @return void
      */
     protected function _addToSearchedStoppers(Token $token)
@@ -818,7 +818,7 @@ class Bbcode implements ParserInterface
     /**
      * Remove from searched stoppers
      *
-     * @param  \Zend\Markup\Token $token
+     * @param  \ZendMarkup\Token $token
      * @return void
      */
     protected function _removeFromSearchedStoppers(Token $token)

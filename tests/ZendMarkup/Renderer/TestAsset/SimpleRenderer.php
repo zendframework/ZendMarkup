@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\Renderer\TestAsset;
+namespace ZendMarkupTest\Renderer\TestAsset;
 
-use Zend\Markup\Renderer\AbstractRenderer;
+use ZendMarkup\Renderer\AbstractRenderer;
 
 /**
  * HTML renderer

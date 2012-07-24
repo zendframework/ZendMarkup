@@ -8,7 +8,7 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup;
+namespace ZendMarkup;
 
 /**
  * @category   Zend

@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Markup;
+namespace ZendMarkup\Renderer\Markup;
 
-use Zend\Markup\Token;
+use ZendMarkup\Token;
 
 /**
  * Simple replace markup
@@ -52,7 +52,7 @@ class Replace extends AbstractMarkup
     /**
      * Invoke the markup on the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param \ZendMarkup\Token $token
      * @param string $text
      *
      * @return string

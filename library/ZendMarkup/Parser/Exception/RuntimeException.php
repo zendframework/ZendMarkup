@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Parser\Exception;
+namespace ZendMarkup\Parser\Exception;
 
-use Zend\Markup\Exception;
+use ZendMarkup\Exception;
 
 class RuntimeException extends Exception\RuntimeException implements
     ExceptionInterface

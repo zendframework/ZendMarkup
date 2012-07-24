@@ -8,12 +8,12 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\Renderer;
+namespace ZendMarkupTest\Renderer;
 
-use ZendTest\Markup\Renderer\TestAsset\SimpleRenderer;
-use Zend\Markup\Token;
-use Zend\Markup\TokenList;
-use Zend\Markup\Renderer\Markup\Replace as ReplaceMarkup;
+use ZendMarkupTest\Renderer\TestAsset\SimpleRenderer;
+use ZendMarkup\Token;
+use ZendMarkup\TokenList;
+use ZendMarkup\Renderer\Markup\Replace as ReplaceMarkup;
 use Zend\Filter\StringToUpper as StringToUpperFilter;
 
 /**
@@ -28,7 +28,7 @@ class AbstractRendererTest extends \PHPUnit_Framework_TestCase
     /**
      * Renderer
      *
-     * @var \ZendTest\Markup\Renderer\TestAsset\SimpleRenderer
+     * @var \ZendMarkupTest\Renderer\TestAsset\SimpleRenderer
      */
     protected $_renderer;
 

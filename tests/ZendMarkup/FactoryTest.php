@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup;
+namespace ZendMarkupTest;
 
-use Zend\Markup;
+use ZendMarkup as Markup;
 
 /**
  * @category   Zend
@@ -24,15 +24,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactory()
     {
         $parsers = Markup\Markup::getParserPluginManager();
-        $parsers->setInvokableClass('mockparser', 'ZendTest\Markup\TestAsset\Parser\MockParser');
+        $parsers->setInvokableClass('mockparser', 'ZendMarkupTest\TestAsset\Parser\MockParser');
 
         $renderers = Markup\Markup::getRendererPluginManager();
-        $renderers->setInvokableClass('mockrenderer', 'ZendTest\Markup\TestAsset\Renderer\MockRenderer');
+        $renderers->setInvokableClass('mockrenderer', 'ZendMarkupTest\TestAsset\Renderer\MockRenderer');
 
         $renderer = Markup\Markup::factory('MockParser', 'MockRenderer');
 
-        $this->assertInstanceOf('ZendTest\\Markup\\TestAsset\\Renderer\\MockRenderer', $renderer);
-        $this->assertInstanceOf('ZendTest\\Markup\\TestAsset\\Parser\\MockParser', $renderer->getParser());
+        $this->assertInstanceOf('ZendMarkupTest\TestAsset\Renderer\MockRenderer', $renderer);
+        $this->assertInstanceOf('ZendMarkupTest\TestAsset\Parser\MockParser', $renderer->getParser());
     }
 
 }

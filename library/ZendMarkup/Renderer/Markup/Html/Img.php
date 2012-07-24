@@ -8,10 +8,10 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Markup\Html;
+namespace ZendMarkup\Renderer\Markup\Html;
 
-use Zend\Markup\Renderer\Markup;
-use Zend\Markup\Token;
+use ZendMarkup\Renderer\Markup;
+use ZendMarkup\Token;
 
 /**
  * Image markup for HTML
@@ -26,7 +26,7 @@ class Img extends AbstractHtml
     /**
      * Convert the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param \ZendMarkup\Token $token
      * @param string $text
      *
      * @return string
@@ -41,7 +41,7 @@ class Img extends AbstractHtml
 
         // check if the URL is valid
         // TODO: use \Zend\Uri for this
-        if (!\Zend\Markup\Renderer\Html::isValidUri($uri)) {
+        if (!\ZendMarkup\Renderer\Html::isValidUri($uri)) {
             return $text;
         }
 

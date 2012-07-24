@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\TestAsset\Parser;
+namespace ZendMarkupTest\TestAsset\Parser;
 
-use Zend\Markup\Parser;
+use ZendMarkup\Parser;
 
 /**
  * @category   Zend

@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\TestAsset\Renderer;
+namespace ZendMarkupTest\TestAsset\Renderer;
 
-use Zend\Markup\Renderer\AbstractRenderer;
+use ZendMarkup\Renderer\AbstractRenderer;
 use Zend\Filter\FilterChain;
 
 /**

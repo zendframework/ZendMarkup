@@ -8,12 +8,12 @@
  * @package   Zend_Markup
  */
 
-namespace ZendTest\Markup\Parser;
+namespace ZendMarkupTest\Parser;
 
-use Zend\Markup\Token;
-use Zend\Markup\TokenList;
-use Zend\Markup\Parser;
-use Zend\Markup\Parser\Bbcode;
+use ZendMarkup\Token;
+use ZendMarkup\TokenList;
+use ZendMarkup\Parser;
+use ZendMarkup\Parser\Bbcode;
 
 /**
  * @category   Zend
@@ -27,7 +27,7 @@ class BbcodeTest extends \PHPUnit_Framework_TestCase
     /**
      * The BBCode parser
      *
-     * @var \Zend\Markup\Parser\Bbcode
+     * @var \ZendMarkup\Parser\Bbcode
      */
     protected $_parser;
 

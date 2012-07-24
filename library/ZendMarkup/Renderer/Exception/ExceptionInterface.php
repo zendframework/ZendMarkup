@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Exception;
+namespace ZendMarkup\Renderer\Exception;
 
-use Zend\Markup\Exception\ExceptionInterface as Exception;
+use ZendMarkup\Exception\ExceptionInterface as Exception;
 
 /**
  * @category   Zend

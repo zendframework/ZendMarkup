@@ -8,7 +8,7 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup;
+namespace ZendMarkup;
 
 use RecursiveIterator;
 
@@ -29,7 +29,7 @@ class TokenList implements RecursiveIterator
     /**
      * Get the current token
      *
-     * @return \Zend\Markup\Token
+     * @return \ZendMarkup\Token
      */
     public function current()
     {
@@ -39,7 +39,7 @@ class TokenList implements RecursiveIterator
     /**
      * Get the children of the current token
      *
-     * @return \Zend\Markup\TokenList
+     * @return \ZendMarkup\TokenList
      */
     public function getChildren()
     {
@@ -49,7 +49,7 @@ class TokenList implements RecursiveIterator
     /**
      * Add a new child token
      *
-     * @param \Zend\Markup\Token $child
+     * @param \ZendMarkup\Token $child
      *
      * @return void
      */
@@ -81,7 +81,7 @@ class TokenList implements RecursiveIterator
     /**
      * Go to the next token
      *
-     * @return \Zend\Markup\Token
+     * @return \ZendMarkup\Token
      */
     public function next()
     {

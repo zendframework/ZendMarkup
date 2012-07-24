@@ -8,9 +8,9 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer\Markup\Html;
+namespace ZendMarkup\Renderer\Markup\Html;
 
-use Zend\Markup;
+use ZendMarkup as Markup;
 
 /**
  * List item markup
@@ -25,7 +25,7 @@ class ListItem extends AbstractHtml
     /**
      * Convert the token
      *
-     * @param \Zend\Markup\Token $token
+     * @param \ZendMarkup\Token $token
      * @param string $text
      *
      * @return string

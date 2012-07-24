@@ -8,13 +8,13 @@
  * @package   Zend_Markup
  */
 
-namespace Zend\Markup\Renderer;
+namespace ZendMarkup\Renderer;
 
 use Traversable;
-use Zend\Markup\Parser;
-use Zend\Markup\Renderer\Markup;
-use Zend\Markup\Token;
-use Zend\Markup\TokenList;
+use ZendMarkup\Parser;
+use ZendMarkup\Renderer\Markup;
+use ZendMarkup\Token;
+use ZendMarkup\TokenList;
 use Zend\Stdlib\ArrayUtils;
 
 /**
@@ -44,14 +44,14 @@ abstract class AbstractRenderer
     /**
      * Parser
      *
-     * @var \Zend\Markup\Parser\ParserInterface
+     * @var \ZendMarkup\Parser\ParserInterface
      */
     protected $_parser;
 
     /**
      * The current token
      *
-     * @var \Zend\Markup\Token
+     * @var \ZendMarkup\Token
      */
     protected $_token;
 
@@ -114,7 +114,7 @@ abstract class AbstractRenderer
      *
      * @param string $encoding
      *
-     * @return \Zend\Markup\Renderer\AbstractRenderer
+     * @return \ZendMarkup\Renderer\AbstractRenderer
      */
     public function setEncoding($encoding)
     {
@@ -235,7 +235,7 @@ abstract class AbstractRenderer
     /**
      * Render a single token
      *
-     * @param  \Zend\Markup\Token $token
+     * @param  \ZendMarkup\Token $token
      * @return string
      */
     protected function _render(Token $token)
@@ -260,7 +260,7 @@ abstract class AbstractRenderer
     /**
      * Execute the token
      *
-     * @param  \Zend\Markup\Token $token
+     * @param  \ZendMarkup\Token $token
      *
      * @return string
      */
