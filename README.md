@@ -1,11 +1,5 @@
-ZendMarkup component
+# ZendMarkup - ZendMarkup module for Zend Framework 2 applications
 
-You can install using:
+# This module is unmaintained and out of date.
 
-```
-curl -s https://getcomposer.org/installer | php
-php composer.phar install
-```
-
-At that point, follow the instructions in the documentation folder for actual
-usage of the component. (Documentation is forthcoming.)
+# Go to https://packagist.org/ and search for any another bbcode/markup plugin.
