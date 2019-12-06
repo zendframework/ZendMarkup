@@ -1,5 +1,9 @@
 ZendMarkup component
 
+> ## Repository abandoned 2019-12-05
+>
+> This repository is no longer maintained.
+
 You can install using:
 
 ```
